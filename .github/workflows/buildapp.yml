@@ -104,25 +104,23 @@ jobs:
             
                 cd main
             
+                # install ipapatch on PATH (as before)
                 ARCH="$(uname -m)"
                 if [[ "$ARCH" == "arm64" ]]; then
                   BIN="ipapatch.macos-arm64"
                 else
                   BIN="ipapatch.macos-x86_64"
                 fi
-            
                 curl -L -o ipapatch "https://github.com/asdfzxcvbn/ipapatch/releases/download/v2.1.2/${BIN}"
                 chmod +x ipapatch
                 mkdir -p "$HOME/.local/bin"
                 mv ipapatch "$HOME/.local/bin/ipapatch"
             
-                which ipapatch
                 ./build.sh sideload
-            
-                ipapatch --input "packages/SCInsta-sideloaded.ipa" --inplace --noconfirm
                 ls -la packages
               env:
                 THEOS: ${{ github.workspace }}/theos
+
 
 
 
