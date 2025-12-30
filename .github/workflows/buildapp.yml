@@ -37,7 +37,11 @@ jobs:
                 submodules: recursive
 
             - name: Install Dependencies
-              run: brew install ldid dpkg make
+              run: |
+                brew install ldid dpkg make pipx
+                echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH
+                echo "$HOME/.local/bin" >> $GITHUB_PATH
+            
 
             - name: Set PATH environment variable
               run: echo "$(brew --prefix make)/libexec/gnubin" >> $GITHUB_PATH 
